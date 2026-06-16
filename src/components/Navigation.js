@@ -29,6 +29,7 @@ const Navigation = (props) => {
           <Option value="au">Australia</Option>
           <Option value="in">India</Option>
           <Option value="us">USA</Option>
+          <Option value="gb">UK</Option>
         </Select>
       </div>
 

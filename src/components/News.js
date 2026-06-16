@@ -49,8 +49,10 @@ const News = (props) => {
             <h1>INDIA</h1>
           ) : props.selectedCountry === "us" ? (
             <h1>USA</h1>
-          ) : (
+          ) : props.selectedCountry === "au" ? (
             <h1>AUSTRALIA</h1>
+          ) : (
+            <h1>UK</h1>
           )}
         </div>
         {loading && <Spinner />}

@@ -6,7 +6,7 @@ import News from "./components/News";
 
 function App() {
 
-  const [selectedCountry, setSelectedCountry] = useState("in");
+  const [selectedCountry, setSelectedCountry] = useState("us");
 
    // Function to handle country change
    const handleCountryChange = (newSelectedCountry) => {
