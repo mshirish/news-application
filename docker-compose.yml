@@ -1,0 +1,9 @@
+services:
+  news:
+    build: .
+    ports:
+      - "3000:80"
+  backend:
+    image: nginx
+  cache:
+    image: redis
