@@ -1,10 +1,16 @@
-name: Hello Actions
+name: Build
 on: push
 jobs:
-  greet:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Say hello
-        run: echo "Hello from GitHub Actions!"
-      - name: Who triggered this
-        run: echo "Pushed by ${{ github.actor }}"
+      - name: Check out the code
+        uses: actions/checkout@v7
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Build the app
+        run: npm run build
