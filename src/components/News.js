@@ -10,16 +10,26 @@ const News = (props) => {
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
 
-  const getNews = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.selectedCountry}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
-    setLoading(true);
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    console.log(parsedData);
-    setArticles(parsedData.articles);
-    setTotalResults(parsedData.totalResults);
+const getNews = async () => {
+  const url = `https://newsapi.org/v2/top-headlines?country=${props.selectedCountry}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+  setLoading(true);
+  let data = await fetch(url);
+  let parsedData = await data.json();
+  console.log(parsedData);
+
+  // Guard against error responses
+  if (parsedData.status === "error" || !parsedData.articles) {
+    console.error("API Error:", parsedData.message);
+    setArticles([]);          // fallback to empty array, not undefined
+    setTotalResults(0);
     setLoading(false);
-  };
+    return;
+  }
+
+  setArticles(parsedData.articles);
+  setTotalResults(parsedData.totalResults);
+  setLoading(false);
+};
 
   useEffect(() => {
     getNews();
@@ -57,7 +67,7 @@ const News = (props) => {
         </div>
         {loading && <Spinner />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-2">
-          {articles.map((element, index) => (
+          {articles?.map((element, index) => (
             <div className="col-md-4" key={index}>
               <NewsItem
                 title={element.title ? element.title.slice(0, 45) : ""}
