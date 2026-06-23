@@ -105,6 +105,7 @@ const getNews = async () => {
   );
 };
 
+
 News.defaultProps = {
   category: "general",
   pageSize: 6,
