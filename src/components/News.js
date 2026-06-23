@@ -11,16 +11,14 @@ const News = (props) => {
   const [totalResults, setTotalResults] = useState(0);
 
 const getNews = async () => {
-  const url = `https://newsapi.org/v2/top-headlines?country=${props.selectedCountry}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+  const url = `/api/news?country=${props.selectedCountry}&category=${props.category}&page=${page}&pageSize=${props.pageSize}`;
   setLoading(true);
   let data = await fetch(url);
   let parsedData = await data.json();
-  console.log(parsedData);
 
-  // Guard against error responses
   if (parsedData.status === "error" || !parsedData.articles) {
     console.error("API Error:", parsedData.message);
-    setArticles([]);          // fallback to empty array, not undefined
+    setArticles([]);
     setTotalResults(0);
     setLoading(false);
     return;
