@@ -7,4 +7,4 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v7
       - name: Build the Docker image
-        run: docker build -t news-app .
+        run: docker build -t news-app:${{ github.sha }} .
