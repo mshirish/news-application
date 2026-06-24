@@ -15,4 +15,4 @@ jobs:
       - name: Build the app
         run: npm run build
       - name: Run tests
-        run: npm test --passWithNoTests
+        run: npm test -- --watchAll=false --passWithNoTests
