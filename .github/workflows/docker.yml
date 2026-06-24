@@ -1,0 +1,10 @@
+name: Docker Build
+on: push
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v7
+      - name: Build the Docker image
+        run: docker build -t news-app .
